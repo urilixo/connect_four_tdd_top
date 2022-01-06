@@ -50,58 +50,58 @@ describe ConnectFour do
   describe '#check_victory' do
     subject(:game_victory) {described_class.new()}
     context 'when 4 tiles are connected horizontally' do
-      let(:h_board) {[
-        %w[_ _ _ _ _ _ _],
-        %w[_ _ _ _ _ _ _],
-        %w[_ _ _ _ _ _ _],
-        %w[_ _ _ _ _ _ _],
-        %w[_ _ _ _ _ _ _],
-        %w[_ _ _ ⚫ ⚫ ⚫ ⚫]
+      let(:h_board){[
+        %w[⚪ ⚪ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ⚪ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ⚪ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ⚪ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ⚪ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ♎ ♎ ♎ ♎ ⚪ ⚪]
       ]}
-      it 'returns victory for player 1' do
-        expect(game_victory).to receive(:victory)
+      it 'returns victory' do
         game_victory.check_victory(h_board)
+        expect(game_victory.victory).to eql(true)
       end
     end
 
     context 'when 4 tiles are connected vertically' do
       let(:v_board) {[
-        %w[_ _ _ _ _ _ _],
-        %w[_ _ _ _ _ _ _],
-        %w[_ _ _ ⚪ _ _ _],
-        %w[_ _ _ ⚪ _ _ _],
-        %w[_ _ _ ⚪ _ _ _],
-        %w[_ _ _ ⚪ ⚫ ⚫ ⚫]
+        %w[⚪ ⚪ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ⚪ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ♎ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ♎ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ♎ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ♎ ⚪ ⚪ ⚪ ⚪ ⚪]
       ]}
-      it 'returns victory for player 2' do
-        expect(game_victory).to receive(:victory)
+      it 'returns victory' do
         game_victory.check_victory(v_board)
+        expect(game_victory.victory).to eql(true)
       end
     end
 
     context 'when 4 tiles are connected diagonally' do
       let(:d_board) {[
-        %w[_ _ _ _ _ _ _],
-        %w[_ _ _ _ _ _ _],
-        %w[_ ⚫ ⚪ ⚪ _ _ _],
-        %w[_ ⚪ ⚫ ⚪ _ _ _],
-        %w[_ ⚪ ⚪ ⚫ _ _ _],
-        %w[_ ⚪ ⚪ ⚪ ⚫ ⚫ ⚫]
+        %w[⚪ ⚪ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ⚪ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ♎ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ♊ ♎ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ♊ ♊ ♎ ⚪ ⚪ ⚪],
+        %w[⚪ ♊ ♊ ♊ ♎ ⚪ ⚪]
       ]}
-      xit 'returns victory for player 1' do
-        expect(game_victory).to receive(:victory)
+      it 'returns victory' do
         game_victory.check_victory(d_board)
+        expect(game_victory.victory).to eql(true)
       end
     end
 
     context 'when there is no winning condition' do
       let(:incomplete_board) {[
-        %w[_ _ _ _ _ _ _],
-        %w[_ _ _ _ _ _ _],
-        %w[⚫ ⚫ ⚪ ⚪ _ _ _],
-        %w[⚫ ⚪ ⚪ ⚪ _ _ _],
-        %w[⚪ ⚫ ⚫ ⚫ _ _ _],
-        %w[⚫ ⚪ ⚪ ⚪ ⚫ ⚫ ⚫]
+        %w[⚪ ⚪ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ⚪ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ⚪ ⚪ ⚪ ⚪ ⚪ ⚪],
+        %w[⚪ ⚪ ⚪ ♎ ⚪ ⚪ ⚪],
+        %w[⚪ ⚪ ⚪ ♎ ⚪ ⚪ ⚪],
+        %w[⚪ ♊ ♊ ♊ ♎ ⚪ ⚪]
       ]}
       it 'returns nil' do
         expect(game_victory.check_victory(incomplete_board)).to be_nil
