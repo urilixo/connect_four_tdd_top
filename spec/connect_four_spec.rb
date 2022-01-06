@@ -50,50 +50,44 @@ describe ConnectFour do
   describe '#check_victory' do
     subject(:game_victory) {described_class.new()}
     context 'when 4 tiles are connected horizontally' do
-      before do
-        let(:h_board) {[
-          %w[_ _ _ _ _ _ _],
-          %w[_ _ _ _ _ _ _],
-          %w[_ _ _ _ _ _ _],
-          %w[_ _ _ _ _ _ _],
-          %w[_ _ _ _ _ _ _],
-          %w[_ _ _ ⚫ ⚫ ⚫ ⚫]
-        ]}
-      end
-      xit 'returns victory for player 1' do
+      let(:h_board) {[
+        %w[_ _ _ _ _ _ _],
+        %w[_ _ _ _ _ _ _],
+        %w[_ _ _ _ _ _ _],
+        %w[_ _ _ _ _ _ _],
+        %w[_ _ _ _ _ _ _],
+        %w[_ _ _ ⚫ ⚫ ⚫ ⚫]
+      ]}
+      it 'returns victory for player 1' do
         expect(game_victory).to receive(:victory)
         game_victory.check_victory(h_board)
       end
     end
 
     context 'when 4 tiles are connected vertically' do
-      before do
-        let(:v_board) {[
-          %w[_ _ _ _ _ _ _],
-          %w[_ _ _ _ _ _ _],
-          %w[_ _ _ ⚪ _ _ _],
-          %w[_ _ _ ⚪ _ _ _],
-          %w[_ _ _ ⚪ _ _ _],
-          %w[_ _ _ ⚪ ⚫ ⚫ ⚫]
-        ]}
-      end
-      xit 'returns victory for player 2' do
+      let(:v_board) {[
+        %w[_ _ _ _ _ _ _],
+        %w[_ _ _ _ _ _ _],
+        %w[_ _ _ ⚪ _ _ _],
+        %w[_ _ _ ⚪ _ _ _],
+        %w[_ _ _ ⚪ _ _ _],
+        %w[_ _ _ ⚪ ⚫ ⚫ ⚫]
+      ]}
+      it 'returns victory for player 2' do
         expect(game_victory).to receive(:victory)
         game_victory.check_victory(v_board)
       end
     end
 
     context 'when 4 tiles are connected diagonally' do
-      before do
-        let(:d_board) {[
-          %w[_ _ _ _ _ _ _],
-          %w[_ _ _ _ _ _ _],
-          %w[_ ⚫ ⚪ ⚪ _ _ _],
-          %w[_ ⚪ ⚫ ⚪ _ _ _],
-          %w[_ ⚪ ⚪ ⚫ _ _ _],
-          %w[_ ⚪ ⚪ ⚪ ⚫ ⚫ ⚫]
-        ]}
-      end
+      let(:d_board) {[
+        %w[_ _ _ _ _ _ _],
+        %w[_ _ _ _ _ _ _],
+        %w[_ ⚫ ⚪ ⚪ _ _ _],
+        %w[_ ⚪ ⚫ ⚪ _ _ _],
+        %w[_ ⚪ ⚪ ⚫ _ _ _],
+        %w[_ ⚪ ⚪ ⚪ ⚫ ⚫ ⚫]
+      ]}
       xit 'returns victory for player 1' do
         expect(game_victory).to receive(:victory)
         game_victory.check_victory(d_board)
@@ -101,17 +95,15 @@ describe ConnectFour do
     end
 
     context 'when there is no winning condition' do
-      before do
-        let(:incomplete_board) {[
-          %w[_ _ _ _ _ _ _],
-          %w[_ _ _ _ _ _ _],
-          %w[⚫ ⚫ ⚪ ⚪ _ _ _],
-          %w[⚫ ⚪ ⚪ ⚪ _ _ _],
-          %w[⚪ ⚫ ⚫ ⚫ _ _ _],
-          %w[⚫ ⚪ ⚪ ⚪ ⚫ ⚫ ⚫]
-        ]}
-      end
-      xit 'returns nil' do
+      let(:incomplete_board) {[
+        %w[_ _ _ _ _ _ _],
+        %w[_ _ _ _ _ _ _],
+        %w[⚫ ⚫ ⚪ ⚪ _ _ _],
+        %w[⚫ ⚪ ⚪ ⚪ _ _ _],
+        %w[⚪ ⚫ ⚫ ⚫ _ _ _],
+        %w[⚫ ⚪ ⚪ ⚪ ⚫ ⚫ ⚫]
+      ]}
+      it 'returns nil' do
         expect(game_victory.check_victory(incomplete_board)).to be_nil
       end
     end
