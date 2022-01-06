@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ConnectFour
   attr_reader :player1, :player2
   attr_accessor :board
@@ -35,8 +37,29 @@ class ConnectFour
 
     board.each { |row| return victory if row.join.include?('⚫⚫⚫⚫') || row.join.include?('⚪⚪⚪⚪') }
     check_victory(board.transpose, transposed: true) unless transposed
-    check_diagonals(board) if transposed
+    check_diagonals(board) unless transposed
     nil
+  end
+
+  private
+
+  def intro
+    puts <<~HEREDOC
+                        --Connect Four--
+
+      You need two players for this game, first player to connect
+         four pieces, in a row, vertically or diagonally wins!
+
+                    Press any key to continue.
+    HEREDOC
+    gets.chomp
+  end
+
+  def check_diagonals(board)
+    padding = [*0..(board.length - 1)].map { |i| [nil] * i }
+    padded = padding.reverse.zip(board).zip(padding).map(&:flatten)
+
+    check_victory(padded.transpose.map(&:compact), transposed: true)
   end
 
   def player_name(name = nil)
@@ -59,4 +82,3 @@ class ConnectFour
     ]
   end
 end
-
